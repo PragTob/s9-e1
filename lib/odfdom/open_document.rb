@@ -13,5 +13,11 @@ class OpenDocument
     end
   end
 
+  # close the document
+  # be aware of the fact that this renders the object useless
+  def close
+    @document.close
+  end
+
 end
 

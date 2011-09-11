@@ -5,14 +5,32 @@ java_import org.odftoolkit.odfdom.doc.OdfTextDocument
 
 class OpenTextDocument < OpenDocument
 
-  def initialize
-    @document = OdfTextDocument.newTextDocument
-    # documents start out with an empty paragraph, I don't want that
-    clear_document
+  def initialize(file_path=nil, &block)
+    unless file_path
+      #create a new document
+      @document = OdfTextDocument.newTextDocument
+      # documents start out with an empty paragraph, I don't want that
+      clear_document
+    else
+      @document = OdfTextDocument.loadDocument file_path
+    end
+
+    if block_given?
+      begin
+        instance_eval(&block)
+        save(file_path) if file_path
+      ensure
+        @document.close
+      end
+    end
+
   end
 
   def save(file_path)
-    @document.save file_path # returns nil on success :-<
+    @document.save file_path
+
+    # it normally returns nil, but some people like to use save in if-statements
+    true
   end
 
   # Create a new paragraph with the given text.
