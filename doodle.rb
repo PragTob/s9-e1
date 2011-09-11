@@ -1,10 +1,12 @@
 # this is a doodling file where I try out stuff and save important code snippets
+
+# IMPORTANT: org.odftoolkit.odfdom.doc.*  <------- there are the good API clases
+
 # examples on how to use this:
 
 require 'java'
 require 'bin/odfdom-java-0.8.7-jar-with-dependencies.jar'
 java_import org.odftoolkit.odfdom.doc.OdfTextDocument
-out = OdfTextDocument.newText
 out = OdfTextDocument.newTextDocument
 out.addText "I am awesome!"
 out.newParagraph
