@@ -11,17 +11,6 @@ class OpenTextDocument < OpenDocument
     clear_document
   end
 
-  # this removes ALL nodes in the document
-  def clear_document
-    content_root = @document.content_root
-    node = content_root.first_child
-
-    while node != nil
-      content_root.remove_child node
-      node = content_root.first_child
-    end
-  end
-
   def save(file_path)
     @document.save file_path # returns nil on success :-<
   end
