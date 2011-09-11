@@ -5,6 +5,10 @@ java_import org.odftoolkit.odfdom.doc.OdfTextDocument
 
 class OpenTextDocument < OpenDocument
 
+  FILE_ENDING = ".odt"
+
+  # massively overloaded, may be used to create a new document
+  # or to load an existing one, if a path is given
   def initialize(file_path=nil, &block)
     unless file_path
       #create a new document
@@ -20,17 +24,32 @@ class OpenTextDocument < OpenDocument
         instance_eval(&block)
         save(file_path) if file_path
       ensure
-        @document.close
+        close
       end
     end
 
   end
 
+  def self.create(file_path, &block)
+    raise "This method expects a block" unless block_given?
+
+    doc = self.new
+    begin
+      doc.instance_eval(&block)
+      doc.save file_path
+    ensure
+      doc.close
+    end
+  end
+
+  # Save the document to the given path
+  # you don't even have to supply the .odt every time
   def save(file_path)
+    file_path << FILE_ENDING if file_path[-4..-1] != FILE_ENDING
     @document.save file_path
 
     # it normally returns nil, but some people like to use save in if-statements
-    true
+    self
   end
 
   # Create a new paragraph with the given text.
@@ -51,6 +70,7 @@ class OpenTextDocument < OpenDocument
   # Text is just added to the last paragraph, no new paragraph created
   def add_text(text)
     @document.add_text text
+    self
   end
 
 end
