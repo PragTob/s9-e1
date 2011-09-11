@@ -1,2 +1,2 @@
-require 'lib/odfdom/open_text_document'
+require 'odfdom/open_text_document'
 

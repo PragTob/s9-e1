@@ -1,5 +1,5 @@
 require 'java'
-require 'bin/odfdom-java-0.8.7-jar-with-dependencies.jar'
+require '../bin/odfdom-java-0.8.7-jar-with-dependencies.jar'
 java_import org.odftoolkit.odfdom.doc.OdfTextDocument
 
 class OpenTextDocument
