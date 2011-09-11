@@ -1,3 +1,7 @@
 *.odt
 *.ods
+*.gem
+.bundle
+Gemfile.lock
+pkg/*
 
