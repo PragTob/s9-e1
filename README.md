@@ -1,6 +1,11 @@
 # Integration Exercise: Java Library Wrapper
 
-I am wrapping the [jOpenDocument library] (http://www.jopendocument.org/). It's a library for creating and modifying Open Document files. So spreadsheets and texts.
+I am wrapping the [ODFDOM] (http://odftoolkit.org/projects/odfdom/pages/Home). It's a library for creating and modifying Open Document files. So spreadsheets, texts and presentations. Not sure if all of these will be in the final release.
+
+*ODF* stands for Open Document Format
+
+Btw. ODFDOM seems to have a pretty decent [beginners guide] (http://www.langintro.com/odfdom_tutorials/index.html).
+The javadoc may be found [here] (http://odfdom.odftoolkit.org/0.8.7/odfdom/apidocs/index.html)
 
 ## Exercise Summary
 
