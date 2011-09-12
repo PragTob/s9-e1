@@ -3,10 +3,14 @@ require 'odfdom/open_document'
 require 'odfdom/open_office_styles'
 require '../bin/odfdom-java-0.8.7-jar-with-dependencies.jar'
 java_import org.odftoolkit.odfdom.doc.OdfTextDocument
+java_import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph
+java_import org.odftoolkit.odfdom.dom.OdfContentDom
+#java_import org.odftoolkit.odfdom.dom.element.office.OfficeTextElement
 
 class OpenTextDocument < OpenDocument
 
   FILE_ENDING = ".odt"
+  DEFAULT_STYLES = { bold: "bold" }
 
   # massively overloaded, may be used to create a new document
   # or to load an existing one, if a path is given
@@ -19,6 +23,11 @@ class OpenTextDocument < OpenDocument
     else
       @document = OdfTextDocument.loadDocument file_path
     end
+
+    @content_dom = @document.content_dom
+    @office_text = @document.content_root
+
+    create_default_styles
 
     if block_given?
       begin
@@ -55,17 +64,23 @@ class OpenTextDocument < OpenDocument
 
   # Create a new paragraph with the given text.
   # If no text is given, just create a paragraph
-  def add_paragraph(paragraph=nil)
-    if paragraph
-      @document.new_paragraph paragraph
+  def add_paragraph(text=nil, style=nil)
+
+    if text == nil
+      paragraph = OdfTextParagraph.new(@content_dom)
+    elsif style == nil
+      paragraph = OdfTextParagraph.new(@content_dom, text)
     else
-      @document.new_paragraph
+      paragraph = OdfTextParagraph.new(@content_dom,
+                                      text,
+                                      DEFAULT_STYLES[style])
     end
+    @office_text.append_child(paragraph)
     self
   end
 
-  def <<(paragraph)
-    add_paragraph paragraph
+  def <<(*args)
+    add_paragraph(*args)
   end
 
   # Text is just added to the last paragraph, no new paragraph created
@@ -75,7 +90,17 @@ class OpenTextDocument < OpenDocument
   end
 
   def document_styles
-    OpenOfficeStyles.new(@document.get_or_create_office_styles)
+    @document_styles || OpenOfficeStyles.new(
+                                      @document.get_or_create_document_styles)
+  end
+
+  private
+
+  def create_default_styles
+    document_styles.new_style("bold", :paragraph) do
+      display_name = "bold Paragraph"
+      font_weight = "bold"
+    end
   end
 
 end

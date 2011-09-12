@@ -10,23 +10,27 @@ class OpenStyle
     @style = style
   end
 
+  def display_name=(name)
+    @style.style_display_name_attribute(name)
+  end
+
   # REMARK: the next 3 methods exist for internationalization reasons
   # idea taken from the odfdom tutorial
   # http://www.langintro.com/odfdom_tutorials/create_odt.html
 
-  def font_weight(value)
+  def font_weight=(value)
     @style.property(OdfStylePropertiesSet.TextProperties.FontWeight, value);
 		@style.property(OdfStyleTextProperties.FontWeightAsian, value);
 		@style.property(OdfStyleTextProperties.FontWeightComplex, value);
   end
 
-  def font_style(value)
+  def font_style=(value)
     @style.property(OdfStyleTextProperties.FontStyle, value);
 		@style.property(OdfStyleTextProperties.FontStyleAsian, value);
 		@style.property(OdfStyleTextProperties.FontStyleComplex, value);
   end
 
-  def font_size(value)
+  def font_size=(value)
     @style.property(OdfStyleTextProperties.FontSize, value);
 		@style.property(OdfStyleTextProperties.FontSize, value);
 		@style.property(OdfStyleTextProperties.FontSize, value);
