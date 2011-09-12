@@ -1,7 +1,7 @@
 require 'java'
-require 'odfdom/open_document'
-require 'odfdom/open_office_styles'
-require '../bin/odfdom-java-0.8.7-jar-with-dependencies.jar'
+require_relative 'open_document'
+require_relative 'open_office_styles'
+require_relative '../../bin/odfdom-java-0.8.7-jar-with-dependencies.jar'
 java_import org.odftoolkit.odfdom.doc.OdfTextDocument
 java_import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph
 java_import org.odftoolkit.odfdom.dom.OdfContentDom
