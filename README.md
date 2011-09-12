@@ -58,6 +58,11 @@ or (if you want this to be your permanent mode)
       add_paragraph("Look at me, I am so beautiful!", "special heading")
     end
 
+# Known Problems
+My libre office takes pretty long to start up with the created files. Dunno what
+that is about. But it starts and no crashes, if you notice anything please
+contact me or open an issue.
+
 ## Exercise Summary
 
 - You should create a gem using JRuby that wraps an existing Java library.
