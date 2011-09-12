@@ -3,15 +3,17 @@ require '../bin/odfdom-java-0.8.7-jar-with-dependencies.jar'
 java_import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle
 java_import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement
 
+# A single style for open documents
 class OpenStyle
 
-  # initialize given our style
-  def initialize(style)
+  # initialize given our style and optionally a block to getto work immideatly
+  def initialize(style, &block)
     @style = style
-    puts "We also got a block here!" if block_given?
-   # instance_eval(&block) if block_given?
+    instance_eval(&block) if block_given?
   end
 
+  # Set/get the display name (it's a dual purpose accessor, you'll see more of
+  # them)
   def display_name(name=nil)
     if name
       @style.style_display_name_attribute = name
@@ -20,8 +22,8 @@ class OpenStyle
     end
   end
 
-  # REMARK: the next 3 methods exist for internationalization reasons
-  # idea taken from the odfdom tutorial
+  # REMARK: the next 3 setter parts are so verbose for internationalization
+  # reasons idea taken from the odfdom tutorial
   # http://www.langintro.com/odfdom_tutorials/create_odt.html
 
   def font_weight(value=nil)
@@ -42,10 +44,6 @@ class OpenStyle
     else
       @style.get_property(StyleTextPropertiesElement::FontStyle)
     end
-  end
-
-  def font_size=(value)
-
   end
 
   def font_size(value=nil)

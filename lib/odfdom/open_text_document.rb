@@ -5,8 +5,8 @@ require '../bin/odfdom-java-0.8.7-jar-with-dependencies.jar'
 java_import org.odftoolkit.odfdom.doc.OdfTextDocument
 java_import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph
 java_import org.odftoolkit.odfdom.dom.OdfContentDom
-#java_import org.odftoolkit.odfdom.dom.element.office.OfficeTextElement
 
+# A normal open text document where you can add paragraphs etc.
 class OpenTextDocument < OpenDocument
 
   FILE_ENDING = ".odt"
@@ -19,12 +19,13 @@ class OpenTextDocument < OpenDocument
     unless file_path
       #create a new document
       @document = OdfTextDocument.newTextDocument
-      # documents start out with an empty paragraph, I don't want that
+      # documents start out with an empty paragraph, we don't want that
       clear_document
     else
       @document = OdfTextDocument.loadDocument file_path
     end
 
+    # most of the Java methods need these two for their functionality
     @content_dom = @document.content_dom
     @office_text = @document.content_root
 
@@ -33,6 +34,7 @@ class OpenTextDocument < OpenDocument
     if block_given?
       begin
         instance_eval(&block)
+        # automatically save the file if a file_path is given
         save(file_path) if file_path
       ensure
         close
@@ -41,6 +43,7 @@ class OpenTextDocument < OpenDocument
 
   end
 
+  # create a file and immideatly get to work
   def self.create(file_path, &block)
     raise "This method expects a block" unless block_given?
 
@@ -82,6 +85,7 @@ class OpenTextDocument < OpenDocument
       end
     end
 
+    # append the created paragraph to the document
     @office_text.append_child(paragraph)
     self
   end
@@ -101,6 +105,7 @@ class OpenTextDocument < OpenDocument
                                       @document.get_or_create_document_styles)
   end
 
+  # shortcut for defining new styles on the document
   def new_style(*args, &block)
     document_styles.new_style(*args, &block)
   end

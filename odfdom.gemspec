@@ -7,9 +7,10 @@ Gem::Specification.new do |s|
   s.version     = Odfdom::VERSION
   s.authors     = ["Tobias Pfeiffer"]
   s.email       = ["tobias.pfeiffer@student.hpi.uni-potsdam.de"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/PragTob/s9-e1"
   s.summary     = %q{A gem wrapping the ODFDOM library using JRuby}
-  s.description = %q{A gem wrapping the ODFDOM library using JRuby}
+  s.description = %q{A gem wrapping the ODFDOM library using JRuby.
+                     Currently only text documents are (partly) supported.}
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
