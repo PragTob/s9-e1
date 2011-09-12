@@ -1,7 +1,7 @@
 require 'java'
 require '../bin/odfdom-java-0.8.7-jar-with-dependencies.jar'
 java_import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle
-java_import org.odftoolkit.odfdom.doc.style.OdfStyleTextProperties
+java_import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet
 
 class OpenStyle
 
@@ -15,7 +15,7 @@ class OpenStyle
   # http://www.langintro.com/odfdom_tutorials/create_odt.html
 
   def font_weight(value)
-    @style.property(OdfStyleTextProperties.FontWeight, value);
+    @style.property(OdfStylePropertiesSet.TextProperties.FontWeight, value);
 		@style.property(OdfStyleTextProperties.FontWeightAsian, value);
 		@style.property(OdfStyleTextProperties.FontWeightComplex, value);
   end
