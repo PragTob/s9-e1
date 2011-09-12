@@ -46,5 +46,27 @@ describe "OpenTextDocument" do
     file_exists?("no_extension.odt").should == true
   end
 
+  # just to make sure no errors occure with normal code
+  # I lack the traversing capabilities for some real good tests
+  it "should not raise an error when it does normal work" do
+    lambda do
+      OpenTextDocument.create(TESTFILES_DIRECTORY + "/styles") do
+        add_heading "I am sooo big!"
+        add_paragraph("I am feeling bold today", :bold)
+        add_paragraph("I am italic", :italic)
+
+        new_style("special heading", :paragraph) do
+          font_size "24pt"
+          font_weight "bold"
+          font_style "italic"
+          display_name "Bold Italic Headline"
+        end
+
+        add_paragraph("Look at me, I am so beautiful!", "special heading")
+      end
+    end.should_not raise_error
+
+  end
+
 end
 
