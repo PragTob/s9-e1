@@ -59,7 +59,7 @@ class OpenTextDocument < OpenDocument
   # Save the document to the given path
   # you don't even have to supply the .odt every time
   def save(file_path)
-    file_path << FILE_ENDING if file_path[-4..-1] != FILE_ENDING
+    file_path << FILE_ENDING if File.extname(file_path) != FILE_ENDING
     @document.save file_path
 
     # it normally returns nil, but some people like to use save in if-statements
@@ -98,6 +98,7 @@ class OpenTextDocument < OpenDocument
 
   def add_heading(text)
     add_paragraph(text, :heading)
+    self
   end
 
   def document_styles
