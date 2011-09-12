@@ -22,6 +22,7 @@ end
 
 OpenTextDocument.create "nonexisting.odt" do
   self << "I don't exist!" << "but you just created me!" << "That's awesome!"
+  add_paragraph("Feeling italic", :italic)
 end
 
 OpenTextDocument.create "no_odt_needed" do

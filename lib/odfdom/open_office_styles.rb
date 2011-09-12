@@ -22,11 +22,8 @@ class OpenOfficeStyles
   # create a new style given it's identifier and the family it belongs to
   def new_style(name, family, &block)
     style = OpenStyle.new(@styles.new_style(name, STYLE_FAMILIES[family]))
-    if block_given?
-      style.instance_eval(&block)
-    else
-      style
-    end
+    style.instance_eval(&block) if block_given?
+    style
   end
 
 end

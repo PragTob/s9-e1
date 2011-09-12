@@ -10,7 +10,7 @@ java_import org.odftoolkit.odfdom.dom.OdfContentDom
 class OpenTextDocument < OpenDocument
 
   FILE_ENDING = ".odt"
-  DEFAULT_STYLES = { bold: "bold", normal: "normal" }
+  DEFAULT_STYLES = { bold: "bold", normal: "normal", italic: "italic" }
 
   # massively overloaded, may be used to create a new document
   # or to load an existing one, if a path is given
@@ -97,16 +97,27 @@ class OpenTextDocument < OpenDocument
   private
 
   def create_default_styles
-    document_styles.new_style("bold", :paragraph) do
-      display_name = "bold Paragraph"
-      font_weight = "bold"
-      font_size = "30pt"
+    style = document_styles.new_style("bold", :paragraph) do
+      display_name "bold Paragraph"
+      font_weight "bold"
+      font_size "30pt"
     end
+
+    puts "Object ID outside the block" << style.object_id.to_s
+    puts style.display_name
+    puts style.font_weight
+
+#    stylo = document_styles.new_style("bold", :paragraph)
+#    stylo.display_name = "bold Paragraph"
+#    stylo.font_weight = "bold"
+#    stylo.font_size = "30pt"
+
+#    puts "!!!!!" << stylo.display_name
 
     stylo = document_styles.new_style("italic", :paragraph)
     stylo.display_name = "ahjaaa"
     stylo.font_size = "14pt"
-    stylo.font_weight = "bold"
+    stylo.font_weight = "italic"
 
     document_styles.new_style("normal", :paragraph) do
       display_name = "Normal"
