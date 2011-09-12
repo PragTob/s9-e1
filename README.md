@@ -1,11 +1,16 @@
 # Integration Exercise: Java Library Wrapper
 
-I am wrapping the [ODFDOM] (http://odftoolkit.org/projects/odfdom/pages/Home). It's a library for creating and modifying Open Document files. So spreadsheets, texts and presentations. Not sure if all of these will be in the final release.
+I am wrapping the [ODFDOM] (http://odftoolkit.org/projects/odfdom/pages/Home).
+It's a library for creating and modifying Open Document files. So spreadsheets,
+texts and presentations. Not sure if all of these will be in the final release.
+For now it's just text files as this was already difficult enough...
 
 *ODF* stands for Open Document Format
 
-Btw. ODFDOM seems to have a pretty decent [beginners guide] (http://www.langintro.com/odfdom_tutorials/index.html).
-The javadoc may be found [here] (http://odfdom.odftoolkit.org/0.8.7/odfdom/apidocs/index.html)
+Btw. ODFDOM seems to have a pretty decent [beginners guide]
+(http://www.langintro.com/odfdom_tutorials/index.html).
+The javadoc may be found [here]
+(http://odfdom.odftoolkit.org/0.8.7/odfdom/apidocs/index.html)
 
 ## Attention!
 You got to use JRuby in 1.9 mode... so please do
