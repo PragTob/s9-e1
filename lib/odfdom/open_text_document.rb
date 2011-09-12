@@ -1,5 +1,6 @@
 require 'java'
 require 'odfdom/open_document'
+require 'odfdom/open_office_styles'
 require '../bin/odfdom-java-0.8.7-jar-with-dependencies.jar'
 java_import org.odftoolkit.odfdom.doc.OdfTextDocument
 
@@ -71,6 +72,10 @@ class OpenTextDocument < OpenDocument
   def add_text(text)
     @document.add_text text
     self
+  end
+
+  def document_styles
+    OpenOfficeStyles.new(@document.get_or_create_office_styles)
   end
 
 end
