@@ -6,4 +6,5 @@ Gemfile.lock
 pkg/*
 resources/*
 .~*
+.rvmrc
 
