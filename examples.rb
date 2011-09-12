@@ -3,29 +3,45 @@ $LOAD_PATH.push './lib'
 require 'odfdom'
 
 def delete_files_in_the_beginning
-  File.delete "nonexisting.odt" if File.exist? "nonexisting.odt"
-  File.delete "no_odt_needed.odt" if File.exist? "no_odt_needed.odt"
+  Dir.glob("*.odt").each { |each| File.delete each }
 end
 
 delete_files_in_the_beginning
 
+# simply creating and saving a file
 my_document = OpenTextDocument.new
 my_document << "Hello Tobi!" << "How are you?" << "Isn't it a nice day?"
-my_document.add_paragraph "olololol"
-my_document.add_paragraph("I am feeling bold today", :bold)
 my_document.save "Tobi.odt"
 my_document.close
 
+# you may also add to already existing documents!
+# if a file name is specified, files get saved automatically
+# also the file gets saved automatically
 OpenTextDocument.new "Tobi.odt" do
-  add_paragraph "blablabla"
+  add_paragraph "Yeah it really is a nice day!"
 end
 
-OpenTextDocument.create "nonexisting.odt" do
+# You can also create documents
+# you don't need to supply a file ending, this nice gem adds it for you!
+OpenTextDocument.create "nonexisting" do
   self << "I don't exist!" << "but you just created me!" << "That's awesome!"
-  add_paragraph("Feeling italic", :italic)
 end
 
-OpenTextDocument.create "no_odt_needed" do
-  add_paragraph "Huhu"
+# And you may also use some of the default styles
+OpenTextDocument.create "styles" do
+  add_heading "I am sooo big!"
+  add_paragraph("I am feeling bold today", :bold)
+  add_paragraph("I am italic", :italic)
+
+  # or define a new style
+  new_style("special heading", :paragraph) do
+    font_size "24pt"
+    font_weight "bold"
+    font_style "italic"
+    display_name "Bold Italic Headline"
+  end
+
+  # refer to the style by name
+  add_paragraph("Look at me, I am so beautiful!", "special heading")
 end
 
