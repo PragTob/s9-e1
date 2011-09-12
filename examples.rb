@@ -11,6 +11,8 @@ delete_files_in_the_beginning
 
 my_document = OpenTextDocument.new
 my_document << "Hello Tobi!" << "How are you?" << "Isn't it a nice day?"
+my_document.add_paragraph "olololol"
+my_document.add_paragraph("I am feeling bold today", :bold)
 my_document.save "Tobi.odt"
 my_document.close
 

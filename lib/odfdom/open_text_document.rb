@@ -10,7 +10,7 @@ java_import org.odftoolkit.odfdom.dom.OdfContentDom
 class OpenTextDocument < OpenDocument
 
   FILE_ENDING = ".odt"
-  DEFAULT_STYLES = { bold: "bold" }
+  DEFAULT_STYLES = { bold: "bold", normal: "normal" }
 
   # massively overloaded, may be used to create a new document
   # or to load an existing one, if a path is given
@@ -69,11 +69,11 @@ class OpenTextDocument < OpenDocument
     if text == nil
       paragraph = OdfTextParagraph.new(@content_dom)
     elsif style == nil
-      paragraph = OdfTextParagraph.new(@content_dom, text)
+      paragraph = OdfTextParagraph.new(@content_dom).add_content(text)
     else
       paragraph = OdfTextParagraph.new(@content_dom,
-                                      text,
-                                      DEFAULT_STYLES[style])
+                                       DEFAULT_STYLES[style],
+                                       text)
     end
     @office_text.append_child(paragraph)
     self
@@ -100,6 +100,16 @@ class OpenTextDocument < OpenDocument
     document_styles.new_style("bold", :paragraph) do
       display_name = "bold Paragraph"
       font_weight = "bold"
+      font_size = "30pt"
+    end
+
+    stylo = document_styles.new_style("italic", :paragraph)
+    stylo.display_name = "ahjaaa"
+    stylo.font_size = "14pt"
+    stylo.font_weight = "bold"
+
+    document_styles.new_style("normal", :paragraph) do
+      display_name = "Normal"
     end
   end
 
