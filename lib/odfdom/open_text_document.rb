@@ -103,17 +103,6 @@ class OpenTextDocument < OpenDocument
       font_size "30pt"
     end
 
-    puts "Object ID outside the block" << style.object_id.to_s
-    puts style.display_name
-    puts style.font_weight
-
-#    stylo = document_styles.new_style("bold", :paragraph)
-#    stylo.display_name = "bold Paragraph"
-#    stylo.font_weight = "bold"
-#    stylo.font_size = "30pt"
-
-#    puts "!!!!!" << stylo.display_name
-
     stylo = document_styles.new_style("italic", :paragraph)
     stylo.display_name = "ahjaaa"
     stylo.font_size = "14pt"
