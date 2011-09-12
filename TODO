@@ -1,6 +1,3 @@
-* get OdfOfficeStyles going ( http://odfdom.odftoolkit.org/0.8.7/odfdom/apidocs/org/odftoolkit/odfdom/incubator/doc/office/OdfOfficeStyles.html )
-* create some default styles
-* heading method for OpenTextDocument
 * get some functional spreadsheets
 * get some feedback
 
