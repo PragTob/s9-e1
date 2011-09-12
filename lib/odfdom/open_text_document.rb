@@ -10,7 +10,8 @@ java_import org.odftoolkit.odfdom.dom.OdfContentDom
 class OpenTextDocument < OpenDocument
 
   FILE_ENDING = ".odt"
-  DEFAULT_STYLES = { bold: "bold", normal: "normal", italic: "italic" }
+  DEFAULT_STYLES = { bold: "bold", italic: "italic", heading: "heading" }
+  DEFAULT_FONT_SIZE = "12pt"
 
   # massively overloaded, may be used to create a new document
   # or to load an existing one, if a path is given
@@ -64,23 +65,25 @@ class OpenTextDocument < OpenDocument
 
   # Create a new paragraph with the given text.
   # If no text is given, just create a paragraph
+  # if a style is supplied use that one, default styles should be symbols
+  # user defined styles should be strings
   def add_paragraph(text=nil, style=nil)
-
     if text == nil
       paragraph = OdfTextParagraph.new(@content_dom)
     elsif style == nil
       paragraph = OdfTextParagraph.new(@content_dom).add_content(text)
     else
-      paragraph = OdfTextParagraph.new(@content_dom,
-                                       DEFAULT_STYLES[style],
-                                       text)
+      if style.instance_of? String
+        paragraph = OdfTextParagraph.new(@content_dom, style, text)
+      else
+        paragraph = OdfTextParagraph.new(@content_dom,
+                                         DEFAULT_STYLES[style],
+                                         text)
+      end
     end
+
     @office_text.append_child(paragraph)
     self
-  end
-
-  def <<(*args)
-    add_paragraph(*args)
   end
 
   # Text is just added to the last paragraph, no new paragraph created
@@ -89,29 +92,43 @@ class OpenTextDocument < OpenDocument
     self
   end
 
+  def add_heading(text)
+    add_paragraph(text, :heading)
+  end
+
   def document_styles
     @document_styles || OpenOfficeStyles.new(
                                       @document.get_or_create_document_styles)
   end
 
+  def new_style(*args, &block)
+    document_styles.new_style(*args, &block)
+  end
+
   private
 
   def create_default_styles
-    style = document_styles.new_style("bold", :paragraph) do
-      display_name "bold Paragraph"
+
+    document_styles.new_style(DEFAULT_STYLES[:bold], :paragraph) do
+      display_name "Bold Paragraph"
       font_weight "bold"
-      font_size "30pt"
+      font_size DEFAULT_FONT_SIZE
     end
 
-    stylo = document_styles.new_style("italic", :paragraph)
-    stylo.display_name = "ahjaaa"
-    stylo.font_size = "14pt"
-    stylo.font_weight = "italic"
-
-    document_styles.new_style("normal", :paragraph) do
-      display_name = "Normal"
+    document_styles.new_style(DEFAULT_STYLES[:italic], :paragraph) do
+      display_name "Italic Paragraph"
+      font_size DEFAULT_FONT_SIZE
+      font_style "italic"
     end
+
+    document_styles.new_style(DEFAULT_STYLES[:heading], :paragraph) do
+      display_name = "Simple Heading"
+      font_size "24pt"
+    end
+
   end
+
+  alias_method :<<, :add_paragraph
 
 end
 
