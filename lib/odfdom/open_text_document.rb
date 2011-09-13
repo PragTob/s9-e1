@@ -17,13 +17,13 @@ class OpenTextDocument < OpenDocument
   # massively overloaded, may be used to create a new document
   # or to load an existing one, if a path is given
   def initialize(file_path=nil, &block)
-    unless file_path
+    if file_path
+      @document = OdfTextDocument.loadDocument file_path
+    else
       #create a new document
       @document = OdfTextDocument.newTextDocument
       # documents start out with an empty paragraph, we don't want that
       clear_document
-    else
-      @document = OdfTextDocument.loadDocument file_path
     end
 
     create_default_styles
