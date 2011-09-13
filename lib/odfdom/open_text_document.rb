@@ -121,6 +121,11 @@ class OpenTextDocument < OpenDocument
     self
   end
 
+  # the number of elements in the document
+  def size
+    @nodes.length
+  end
+
   private
 
   def create_default_styles
