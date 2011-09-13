@@ -128,6 +128,8 @@ class OpenTextDocument < OpenDocument
 
   private
 
+  # it appears as if there are already 122 paragraph styles to use...
+  # but well I'll leave it in here for now :-)
   def create_default_styles
 
     document_styles.new_style(DEFAULT_STYLES[:bold], :paragraph) do
