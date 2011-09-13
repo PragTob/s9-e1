@@ -26,5 +26,12 @@ class OpenOfficeStyles
     OpenStyle.new(@styles.new_style(name, STYLE_FAMILIES[family]), &block)
   end
 
+  def styles_for_family(family)
+    java_styles_iterator = @styles.get_styles_for_family(STYLE_FAMILIES[family])
+
+    #create an array with our own style classes
+    java_styles_iterator.inject([]) { |sum, style| sum << OpenStyle.new(style) }
+  end
+
 end
 

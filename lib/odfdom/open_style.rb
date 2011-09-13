@@ -22,6 +22,15 @@ class OpenStyle
     end
   end
 
+  # the internal name
+  def name(name=nil)
+    if name
+      @style.style_name_attribute = name
+    else
+      @style.style_name_attribute
+    end
+  end
+
   # REMARK: the next 3 setter parts are so verbose for internationalization
   # reasons idea taken from the odfdom tutorial
   # http://www.langintro.com/odfdom_tutorials/create_odt.html
