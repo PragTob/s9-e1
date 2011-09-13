@@ -26,13 +26,6 @@ class OpenTextDocument < OpenDocument
       @document = OdfTextDocument.loadDocument file_path
     end
 
-    # most of the Java methods need these two for their functionality
-    @content_dom = @document.content_dom
-    @office_text = @document.content_root
-
-    # the different nodes in our document, needed for each magic
-    @nodes = @office_text.child_nodes
-
     create_default_styles
 
     if block_given?
@@ -45,6 +38,15 @@ class OpenTextDocument < OpenDocument
       end
     end
 
+  end
+
+  def set_important_instance_variables
+    # most of the Java methods need these two for their functionality
+    @content_dom = @document.content_dom
+    @office_text = @document.content_root
+
+    # the different nodes in our document, needed for each magic
+    @nodes = @office_text.child_nodes
   end
 
   # create a file and immideatly get to work
