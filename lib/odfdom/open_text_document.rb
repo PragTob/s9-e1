@@ -8,6 +8,7 @@ java_import org.odftoolkit.odfdom.dom.OdfContentDom
 
 # A normal open text document where you can add paragraphs etc.
 class OpenTextDocument < OpenDocument
+  include Enumerable
 
   FILE_ENDING = ".odt"
   DEFAULT_STYLES = { bold: "bold", italic: "italic", heading: "heading" }
@@ -28,6 +29,9 @@ class OpenTextDocument < OpenDocument
     # most of the Java methods need these two for their functionality
     @content_dom = @document.content_dom
     @office_text = @document.content_root
+
+    # the different nodes in our document, needed for each magic
+    @nodes = @office_text.child_nodes
 
     create_default_styles
 
@@ -109,6 +113,12 @@ class OpenTextDocument < OpenDocument
   # shortcut for defining new styles on the document
   def new_style(*args, &block)
     document_styles.new_style(*args, &block)
+  end
+
+  # iterate over each element of the content
+  def each
+    (0...@nodes.length).each { |i| yield @nodes.item(i) }
+    self
   end
 
   private
