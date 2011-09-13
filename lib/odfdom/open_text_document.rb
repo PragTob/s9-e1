@@ -26,6 +26,7 @@ class OpenTextDocument < OpenDocument
       clear_document
     end
 
+    set_important_instance_variables
     create_default_styles
 
     if block_given?
