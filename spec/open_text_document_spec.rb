@@ -46,6 +46,32 @@ describe "OpenTextDocument" do
     file_exists?("no_extension.odt").should == true
   end
 
+  it "should be empty when created" do
+    @doc.size.should == 0
+  end
+
+  it "should have increased size when a pragraph is added" do
+    @doc << "A nice paragraph"
+    @doc.size.should == 1
+  end
+
+  it "should not change its size when loaded" do
+    @doc << "A little paragraph" << "and another one"
+    old_size = @doc.size
+    @doc.save "test.odt"
+
+    the_same_doc = OpenTextDocument.new "test.odt"
+    the_same_doc.size.should == old_size
+  end
+
+  it "should not change it's size when add_text is called,
+      since no new paragraphs are created" do
+    @doc << "A paragraph"
+    old_size = @doc.size
+    @doc.add_text "Blablabla"
+    @doc.size.should == old_size
+  end
+
   # just to make sure no errors occure with normal code
   # I lack the traversing capabilities for some real good tests
   it "should not raise an error when it does normal work" do
