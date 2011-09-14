@@ -60,26 +60,17 @@ class OpenTextDocument < OpenDocument
     self
   end
 
-  # Create a new paragraph with the given text.
-  # If no text is given, just create a paragraph
-  # if a style is supplied use that one, default styles should be symbols
-  # user defined styles should be strings
   def add_paragraph(text=nil, style=nil)
-    if text == nil
-      paragraph = OdfTextParagraph.new(@content_dom)
-    elsif style == nil
-      paragraph = OdfTextParagraph.new(@content_dom).add_content(text)
-    else
-      if style.instance_of? String
-        paragraph = OdfTextParagraph.new(@content_dom, style, text)
-      else
-        paragraph = OdfTextParagraph.new(@content_dom,
-                                         DEFAULT_STYLES[style],
-                                         text)
-      end
-    end
+    paragraph = if text.nil?
+                  OdfTextParagraph.new(@content_dom)
+                elsif style.nil?
+                  OdfTextParagraph.new(@content_dom).add_content(text)
+                else
+                  OdfTextParagraph.new(@content_dom,
+                                       DEFAULT_STYLES[style] || style,
+                                       text)
+                end
 
-    # append the created paragraph to the document
     @office_text.append_child(paragraph)
     self
   end
