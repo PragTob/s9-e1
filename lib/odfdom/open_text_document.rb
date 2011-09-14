@@ -116,24 +116,32 @@ class OpenTextDocument
   # it appears as if there are already 122 paragraph styles to use...
   # but well I'll leave it in here for now :-)
   def create_default_styles
+    create_bold_style
+    create_italic_style
+    create_heading_style
+  end
 
+  def create_bold_style
     document_styles.new_style(DEFAULT_STYLES[:bold], :paragraph) do
       display_name "Bold Paragraph"
       font_weight "bold"
       font_size DEFAULT_FONT_SIZE
     end
+  end
 
+  def create_italic_style
     document_styles.new_style(DEFAULT_STYLES[:italic], :paragraph) do
       display_name "Italic Paragraph"
       font_size DEFAULT_FONT_SIZE
       font_style "italic"
     end
+  end
 
+  def create_heading_style
     document_styles.new_style(DEFAULT_STYLES[:heading], :paragraph) do
       display_name = "Simple Heading"
       font_size "24pt"
     end
-
   end
 
 end
