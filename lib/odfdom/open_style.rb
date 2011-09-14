@@ -25,11 +25,16 @@ class OpenStyle
 
   alias_method :name=, :name
 
+  def allow_symbols_as_values(value)
+    value = value.to_s
+  end
+
   # REMARK: the next 3 setter parts are so verbose for internationalization
   # reasons idea taken from the odfdom tutorial
   # http://www.langintro.com/odfdom_tutorials/create_odt.html
 
   def font_weight=(value)
+    allow_symbols_as_values(value)
     @style.set_property(StyleTextPropertiesElement::FontWeight, value);
 		@style.set_property(StyleTextPropertiesElement::FontWeightAsian, value);
 		@style.set_property(StyleTextPropertiesElement::FontWeightComplex, value);
@@ -41,6 +46,7 @@ class OpenStyle
   end
 
   def font_style=(value)
+    allow_symbols_as_values(value)
     @style.set_property(StyleTextPropertiesElement::FontStyle, value);
 		@style.set_property(StyleTextPropertiesElement::FontStyleAsian, value);
 		@style.set_property(StyleTextPropertiesElement::FontStyleComplex, value);

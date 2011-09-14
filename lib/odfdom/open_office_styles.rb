@@ -22,7 +22,6 @@ class OpenOfficeStyles
     @styles = java_office_styles_object
   end
 
-  # create a new style given it's identifier and the family it belongs to
   def new_style(name, family, &block)
     OpenStyle.new(@styles.new_style(name, STYLE_FAMILIES[family]), &block)
   end

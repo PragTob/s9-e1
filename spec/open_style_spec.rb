@@ -3,6 +3,7 @@ describe "OpenStyle" do
   # styles belong to docs therefore we need a doc
   before :each do
     @doc = OpenTextDocument.new
+    @style = @doc.new_style("testie", :paragraph)
   end
 
   # added toprotect against regressions
@@ -12,6 +13,20 @@ describe "OpenStyle" do
     end
 
     style.display_name.should == "A good test"
+  end
+  describe "some attributes may be set with a symbol, however their getters
+    still return a String" do
+
+    it "should work for font_weight" do
+      @style.font_weight = :bold
+      @style.font_weight.should == "bold"
+    end
+
+    it "should work for font_style" do
+      @style.font_weight = :italic
+      @style.font_weight.should == "italic"
+    end
+
   end
 
 end
