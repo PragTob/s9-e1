@@ -77,6 +77,7 @@ class OpenTextDocument
   end
 
   alias_method :add_p, :add_paragraph
+  alias_method :<<, :add_paragraph
 
   # Text is just added to the last paragraph, no new paragraph created
   def add_text(text)
@@ -134,8 +135,6 @@ class OpenTextDocument
     end
 
   end
-
-  alias_method :<<, :add_paragraph
 
 end
 
