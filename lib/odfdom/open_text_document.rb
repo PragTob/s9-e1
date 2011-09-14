@@ -15,8 +15,7 @@ class OpenTextDocument
   DEFAULT_STYLES = { bold: "bold", italic: "italic", heading: "heading" }
   DEFAULT_FONT_SIZE = "12pt"
 
-  # massively overloaded, may be used to create a new document
-  # or to load an existing one, if a path is given
+  # create a new document or to load an existing one, if a path is given
   def initialize(file_path=nil, &block)
     create_the_basic_document(file_path)
     set_important_instance_variables
@@ -79,7 +78,7 @@ class OpenTextDocument
     self
   end
 
-  # the number of elements in the document
+  # the number of elements in the document (paragraphs etc.)
   def size
     @nodes.length
   end
@@ -90,7 +89,6 @@ class OpenTextDocument
     if file_path && File.exist?(file_path)
       @document = OdfTextDocument.loadDocument file_path
     else
-      #create a new document
       @document = OdfTextDocument.newTextDocument
       # documents start out with an empty paragraph, we don't want that
       clear_document

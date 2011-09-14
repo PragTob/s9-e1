@@ -6,7 +6,6 @@ java_import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement
 # A single style for open documents
 class OpenStyle
 
-  # initialize given our style and optionally a block to getto work immideatly
   def initialize(style, &block)
     @style = style
     instance_eval(&block) if block_given?
