@@ -20,7 +20,7 @@ class OpenTextDocument
     create_the_basic_document(file_path)
     set_important_instance_variables
     create_default_styles
-    evaluate_creation_block(file_path, &block) if block_given?
+    evaluate_block(file_path, &block) if block_given?
   end
 
   # Save the document to the given path
@@ -104,7 +104,7 @@ class OpenTextDocument
     @nodes = @office_text.child_nodes
   end
 
-  def evaluate_creation_block(file_path, &block)
+  def evaluate_block(file_path, &block)
     begin
       instance_eval(&block)
       # automatically save the file if a file_path is given
