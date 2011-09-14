@@ -7,8 +7,9 @@ java_import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph
 java_import org.odftoolkit.odfdom.dom.OdfContentDom
 
 # A normal open text document where you can add paragraphs etc.
-class OpenTextDocument < OpenDocument
+class OpenTextDocument
   include Enumerable
+  include OpenDocument
 
   FILE_ENDING = ".odt"
   DEFAULT_STYLES = { bold: "bold", italic: "italic", heading: "heading" }

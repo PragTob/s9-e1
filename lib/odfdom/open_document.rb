@@ -1,5 +1,5 @@
 # the base class for all open Documents, offering basic methods
-class OpenDocument
+module OpenDocument
 
   # this removes ALL nodes in the document
   # so afterwards the document is empty
