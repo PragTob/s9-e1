@@ -36,12 +36,15 @@ or (if you want this to be your permanent mode)
 
     # You can also create documents
     # you don't need to supply a file ending, this nice gem adds it for you!
-    OpenTextDocument.create "nonexisting" do
-      self << "I don't exist!" << "but you just created me!" << "That's awesome!"
+    OpenTextDocument.new "nonexisting" do
+      add_paragraph "I don't exist!"
+      add_paragraph "but you just created me!"
+      # if you feel like paragraph is to verbose
+      add_p "That's awesome!"
     end
 
     # And you may also use some of the default styles
-    OpenTextDocument.create "styles" do
+    OpenTextDocument.new "styles" do
       add_heading "I am sooo big!"
       add_paragraph("I am feeling bold today", :bold)
       add_paragraph("I am italic", :italic)

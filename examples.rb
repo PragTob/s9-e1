@@ -24,7 +24,10 @@ end
 # You can also create documents
 # you don't need to supply a file ending, this nice gem adds it for you!
 OpenTextDocument.new "nonexisting" do
-  self << "I don't exist!" << "but you just created me!" << "That's awesome!"
+  add_paragraph "I don't exist!"
+  add_paragraph "but you just created me!"
+  # if you feel like paragraph is to verbose
+  add_p "That's awesome!"
 end
 
 # And you may also use some of the default styles
