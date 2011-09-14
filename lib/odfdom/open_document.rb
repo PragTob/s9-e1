@@ -7,10 +7,7 @@ module OpenDocument
     content_root = @document.content_root
     node = content_root.first_child
 
-    while node != nil
-      content_root.remove_child(node)
-      node = content_root.first_child
-    end
+    while node = content_root.first_child do content_root.remove_child(node) end
   end
 
   # close the document
