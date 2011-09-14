@@ -17,7 +17,7 @@ class OpenTextDocument < OpenDocument
   # massively overloaded, may be used to create a new document
   # or to load an existing one, if a path is given
   def initialize(file_path=nil, &block)
-    if file_path
+    if file_path && File.exist?(file_path)
       @document = OdfTextDocument.loadDocument file_path
     else
       #create a new document
@@ -48,19 +48,6 @@ class OpenTextDocument < OpenDocument
 
     # the different nodes in our document, needed for each magic
     @nodes = @office_text.child_nodes
-  end
-
-  # create a file and immideatly get to work
-  def self.create(file_path, &block)
-    raise "This method expects a block" unless block_given?
-
-    doc = self.new
-    begin
-      doc.instance_eval(&block)
-      doc.save file_path
-    ensure
-      doc.close
-    end
   end
 
   # Save the document to the given path

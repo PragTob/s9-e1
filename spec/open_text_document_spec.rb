@@ -33,8 +33,7 @@ describe "OpenTextDocument" do
   end
 
   it "should create a file when create is used" do
-    OpenTextDocument.create(TESTFILES_DIRECTORY+"/another_test.odt") do
-    end
+    OpenTextDocument.new(TESTFILES_DIRECTORY+"/another_test.odt") {}
 
     file_exists?("another_test.odt").should == true
   end
@@ -76,7 +75,7 @@ describe "OpenTextDocument" do
   # I lack the traversing capabilities for some real good tests
   it "should not raise an error when it does normal work" do
     lambda do
-      OpenTextDocument.create(TESTFILES_DIRECTORY + "/styles") do
+      OpenTextDocument.new(TESTFILES_DIRECTORY + "/styles") do
         add_heading "I am sooo big!"
         add_paragraph("I am feeling bold today", :bold)
         add_paragraph("I am italic", :italic)

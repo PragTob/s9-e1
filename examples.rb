@@ -23,12 +23,12 @@ end
 
 # You can also create documents
 # you don't need to supply a file ending, this nice gem adds it for you!
-OpenTextDocument.create "nonexisting" do
+OpenTextDocument.new "nonexisting" do
   self << "I don't exist!" << "but you just created me!" << "That's awesome!"
 end
 
 # And you may also use some of the default styles
-OpenTextDocument.create "styles" do
+OpenTextDocument.new "styles" do
   add_heading "I am sooo big!"
   add_paragraph("I am feeling bold today", :bold)
   add_paragraph("I am italic", :italic)
