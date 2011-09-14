@@ -57,9 +57,9 @@ describe "OpenTextDocument" do
   it "should not change its size when loaded" do
     @doc << "A little paragraph" << "and another one"
     old_size = @doc.size
-    @doc.save "test.odt"
+    @doc.save(TESTFILES_DIRECTORY + "/test.odt")
 
-    the_same_doc = OpenTextDocument.new "test.odt"
+    the_same_doc = OpenTextDocument.new(TESTFILES_DIRECTORY + "/test.odt")
     the_same_doc.size.should == old_size
   end
 
