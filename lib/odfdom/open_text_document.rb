@@ -18,37 +18,10 @@ class OpenTextDocument
   # massively overloaded, may be used to create a new document
   # or to load an existing one, if a path is given
   def initialize(file_path=nil, &block)
-    if file_path && File.exist?(file_path)
-      @document = OdfTextDocument.loadDocument file_path
-    else
-      #create a new document
-      @document = OdfTextDocument.newTextDocument
-      # documents start out with an empty paragraph, we don't want that
-      clear_document
-    end
-
+    create_the_basic_document(file_path)
     set_important_instance_variables
     create_default_styles
-
-    if block_given?
-      begin
-        instance_eval(&block)
-        # automatically save the file if a file_path is given
-        save(file_path) if file_path
-      ensure
-        close
-      end
-    end
-
-  end
-
-  def set_important_instance_variables
-    # most of the Java methods need these two for their functionality
-    @content_dom = @document.content_dom
-    @office_text = @document.content_root
-
-    # the different nodes in our document, needed for each magic
-    @nodes = @office_text.child_nodes
+    evaluate_creation_block(file_path, &block) if block_given?
   end
 
   # Save the document to the given path
@@ -112,6 +85,36 @@ class OpenTextDocument
   end
 
   private
+
+  def create_the_basic_document(file_path)
+    if file_path && File.exist?(file_path)
+      @document = OdfTextDocument.loadDocument file_path
+    else
+      #create a new document
+      @document = OdfTextDocument.newTextDocument
+      # documents start out with an empty paragraph, we don't want that
+      clear_document
+    end
+  end
+
+  def set_important_instance_variables
+    # most of the Java methods need these two for their functionality
+    @content_dom = @document.content_dom
+    @office_text = @document.content_root
+
+    # the different nodes in our document, needed for each magic
+    @nodes = @office_text.child_nodes
+  end
+
+  def evaluate_creation_block(file_path, &block)
+    begin
+      instance_eval(&block)
+      # automatically save the file if a file_path is given
+      save(file_path) if file_path
+    ensure
+      close
+    end
+  end
 
   # it appears as if there are already 122 paragraph styles to use...
   # but well I'll leave it in here for now :-)
