@@ -7,8 +7,9 @@ class OpenDocument
     content_root = @document.content_root
     node = content_root.first_child
 
-    while (node = content_root.first_child)
+    while node != nil
       content_root.remove_child(node)
+      node = content_root.first_child
     end
   end
 
