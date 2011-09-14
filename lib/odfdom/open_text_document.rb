@@ -84,6 +84,8 @@ class OpenTextDocument < OpenDocument
     self
   end
 
+  alias_method :add_p, :add_paragraph
+
   # Text is just added to the last paragraph, no new paragraph created
   def add_text(text)
     @document.add_text text
