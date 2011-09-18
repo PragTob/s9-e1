@@ -5,21 +5,23 @@ require "odfdom/version"
 Gem::Specification.new do |s|
   s.name        = "odfdom"
   s.version     = Odfdom::VERSION
-  s.authors     = ["Tobias Pfeiffer"]
-  s.email       = ["tobias.pfeiffer@student.hpi.uni-potsdam.de"]
+  s.author     = "Tobias Pfeiffer"
+  s.email       = "tobias.pfeiffer@student.hpi.uni-potsdam.de"
   s.homepage    = "https://github.com/PragTob/s9-e1"
   s.summary     = %q{A gem wrapping the ODFDOM library using JRuby}
   s.description = %q{A gem wrapping the ODFDOM library using JRuby.
                      Currently only text documents are (partly) supported.}
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.files         = Dir['lib/**/*.rb'] + %w[
+    README.md
+    Rakefile
+    textcomb.gemspec
+    bin/cue.language.jar
+  ]
+  s.test_files    = Dir['spec/*.rb'] + ['spec/test_files']
   s.require_paths = ["lib"]
 
-  # specify any dependencies here; for example:
   s.add_development_dependency "rspec"
   s.add_development_dependency "rake"
-  # s.add_runtime_dependency "rest-client"
 end
 
