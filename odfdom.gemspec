@@ -15,8 +15,8 @@ Gem::Specification.new do |s|
   s.files         = Dir['lib/**/*.rb'] + %w[
     README.md
     Rakefile
-    textcomb.gemspec
-    bin/cue.language.jar
+    odfdom.gemspec
+    bin/odfdom-java-0.8.7-jar-with-dependencies.jar
   ]
   s.test_files    = Dir['spec/*.rb'] + ['spec/test_files']
   s.require_paths = ["lib"]
