@@ -1,5 +1,3 @@
-$LOAD_PATH.push './lib'
-
 require 'odfdom'
 
 TESTFILES_DIRECTORY = "spec/test_files"
@@ -69,6 +67,44 @@ describe "OpenTextDocument" do
     old_size = @doc.size
     @doc.add_text "Blablabla"
     @doc.size.should == old_size
+  end
+
+  it "should be able to add a styled paragraph" do
+    lambda { @doc.add_paragraph("Para", :bold) }.should_not raise_error
+    @doc.size.should == 1
+  end
+
+  it "should be able to add an heading" do
+    lambda { @doc.add_heading("Heading") }.should_not raise_error
+    @doc.size.should == 1
+  end
+
+  it "should be able to iterate over all elements using each" do
+    same = "same"
+    @doc << same << same << same
+    i = 0
+    @doc.each do |each|
+      i += 1
+      each.to_s.should == same
+    end
+
+    i.should == 3
+  end
+
+  it "should be able to use the to_a method thanks to Enumerable" do
+    @doc << "1" << "2" << "3"
+    @doc.add_heading("I am also a normal item!")
+
+    @doc.to_a.size.should == @doc.size
+  end
+
+  # last check of Enumerable integration working, I promise!
+  it "should be able to use the awesome select method thanks to Enumerable" do
+    @doc << "The good" << "The bad" << "The ugly"
+    ugly = @doc.select { |each| each.content =~ /ugly/ }
+
+    ugly.size.should == 1
+    ugly.first.content.should == "The ugly"
   end
 
   # just to make sure no errors occure with normal code

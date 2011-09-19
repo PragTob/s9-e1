@@ -1,3 +1,5 @@
+require 'odfdom'
+
 describe "OpenOfficeStyles" do
 
   before(:each) do

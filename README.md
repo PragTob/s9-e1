@@ -44,7 +44,7 @@ or (if you want this to be your permanent mode)
     end
 
     # And you may also use some of the default styles
-    OpenTextDocument.new "styles" do
+    test = OpenTextDocument.new "styles" do
       add_heading "I am sooo big!"
       add_paragraph("I am feeling bold today", :bold)
       add_paragraph("I am italic", :italic)
@@ -60,6 +60,9 @@ or (if you want this to be your permanent mode)
       # refer to the style by name
       add_paragraph("Look at me, I am so beautiful!", "special heading")
     end
+
+    # you can iterate over all the paragraphs in a document
+    test.each { |each| puts each }
 
 # Known Problems
 My libre office takes pretty long to start up with the created files. Dunno what

@@ -1,6 +1,7 @@
 require 'java'
 require_relative 'open_document'
 require_relative 'open_office_styles'
+require_relative 'open_text_paragraph'
 require_relative '../../bin/odfdom-java-0.8.7-jar-with-dependencies.jar'
 java_import org.odftoolkit.odfdom.doc.OdfTextDocument
 java_import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph
@@ -40,8 +41,8 @@ class OpenTextDocument
                   OdfTextParagraph.new(@content_dom).add_content(text)
                 else
                   OdfTextParagraph.new(@content_dom,
-                                       DEFAULT_STYLES[style] || style,
-                                       text)
+                    DEFAULT_STYLES[style] || style,
+                    text)
                 end
 
     @office_text.append_child(paragraph)
@@ -74,7 +75,15 @@ class OpenTextDocument
 
   # iterate over each element of the content
   def each
-    (0...@nodes.length).each { |i| yield @nodes.item(i) }
+    (0...size).each do |i|
+      if @nodes.item(i).class ==
+        Java::OrgOdftoolkitOdfdomIncubatorDocText::OdfTextParagraph
+        # we got a wrapper for that!
+        yield OpenTextParagraph.new(@nodes.item(i))
+      else
+        yield @nodes.item(i)
+      end
+    end
     self
   end
 

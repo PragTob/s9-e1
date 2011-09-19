@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.required_ruby_version = ">= 1.9.2"
+  s.platform = "java"
 
   s.add_development_dependency "rspec"
   s.add_development_dependency "rake"

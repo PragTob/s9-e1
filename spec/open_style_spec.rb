@@ -1,3 +1,5 @@
+require 'odfdom'
+
 describe "OpenStyle" do
 
   # styles belong to docs therefore we need a doc
