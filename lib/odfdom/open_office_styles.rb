@@ -1,6 +1,6 @@
 require 'java'
 require_relative 'open_style'
-require_relative '../../bin/odfdom-java-0.8.7-jar-with-dependencies.jar'
+require_relative '../../ext/odfdom-java-0.8.7-jar-with-dependencies.jar'
 java_import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles
 java_import org.odftoolkit.odfdom.dom.style.OdfStyleFamily
 
