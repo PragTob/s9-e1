@@ -1,9 +1,9 @@
 require 'odfdom'
 
-TESTFILES_DIRECTORY = "spec/test_files"
+TESTFILES_DIRECTORY = "spec/test_files/"
 
 def file_exists?(file_name)
-  File.exist?(TESTFILES_DIRECTORY + "/" + file_name)
+  File.exist?(TESTFILES_DIRECTORY + file_name)
 end
 
 describe "OpenTextDocument" do
@@ -25,19 +25,19 @@ describe "OpenTextDocument" do
   end
 
   it "should create a file when saved" do
-    @doc.save(TESTFILES_DIRECTORY+"/test.odt")
+    @doc.save(TESTFILES_DIRECTORY+"test.odt")
 
     file_exists?("test.odt").should == true
   end
 
   it "should create a file when create is used" do
-    OpenTextDocument.new(TESTFILES_DIRECTORY+"/another_test.odt") {}
+    OpenTextDocument.new(TESTFILES_DIRECTORY+"another_test.odt") {}
 
     file_exists?("another_test.odt").should == true
   end
 
   it "should automatically add .odt when it is not specified" do
-    @doc.save(TESTFILES_DIRECTORY + "/no_extension")
+    @doc.save(TESTFILES_DIRECTORY + "no_extension")
 
     file_exists?("no_extension").should_not == true
     file_exists?("no_extension.odt").should == true
@@ -55,9 +55,9 @@ describe "OpenTextDocument" do
   it "should not change its size when loaded" do
     @doc << "A little paragraph" << "and another one"
     old_size = @doc.size
-    @doc.save(TESTFILES_DIRECTORY + "/test.odt")
+    @doc.save(TESTFILES_DIRECTORY + "test.odt")
 
-    the_same_doc = OpenTextDocument.new(TESTFILES_DIRECTORY + "/test.odt")
+    the_same_doc = OpenTextDocument.new(TESTFILES_DIRECTORY + "test.odt")
     the_same_doc.size.should == old_size
   end
 
