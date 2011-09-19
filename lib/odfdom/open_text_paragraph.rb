@@ -1,5 +1,3 @@
-java_import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph
-
 # Wrapper for OdfTextParagraph, it is however only used when the pargraph
 # is returned to the user of the library, otherwise OpenTextDocument works with
 # the native java class.

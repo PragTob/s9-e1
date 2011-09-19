@@ -3,7 +3,7 @@ require 'odfdom'
 
 describe "OpenParagraph" do
 
-  before(:each) do
+  before :each do
     doc = OpenTextDocument.new
     doc << "A stupid paragraph"
     doc.add_paragraph("A styled paragraph", :bold)
