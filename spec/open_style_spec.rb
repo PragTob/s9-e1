@@ -16,8 +16,7 @@ describe "OpenStyle" do
 
     style.display_name.should == "A good test"
   end
-  describe "some attributes may be set with a symbol, however their getters
-    still return a String" do
+  describe "some attributes may be set with a symbol" do
 
     it "should work for font_weight" do
       @style.font_weight = :bold

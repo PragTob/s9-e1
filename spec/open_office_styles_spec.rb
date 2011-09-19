@@ -10,9 +10,10 @@ describe "OpenOfficeStyles" do
     styles = @doc.document_styles
     old_number = styles.styles_for_family(:paragraph).size
 
-    styles.new_style("test", :paragraph)
+    lambda do
+      styles.new_style("test", :paragraph)
+    end.should change { styles.styles_for_family(:paragraph).size }.by(1)
 
-    styles.styles_for_family(:paragraph).size.should == (old_number + 1)
   end
 
 end

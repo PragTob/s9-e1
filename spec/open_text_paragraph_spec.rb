@@ -7,10 +7,7 @@ describe "OpenParagraph" do
     doc = OpenTextDocument.new
     doc << "A stupid paragraph"
     doc.add_paragraph("A styled paragraph", :bold)
-    paragraphs = doc.to_a
-
-    @paragraph = paragraphs[0]
-    @styled_paragraph = paragraphs[1]
+    @paragraph, @styled_paragraph  = doc.to_a
   end
 
   it "should display it's content when to_s is called" do
