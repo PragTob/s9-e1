@@ -34,9 +34,9 @@ class OpenStyle
 
   def font_weight=(value)
     allow_symbols_as_values(value)
-    @style.set_property(StyleTextPropertiesElement::FontWeight, value);
-		@style.set_property(StyleTextPropertiesElement::FontWeightAsian, value);
-		@style.set_property(StyleTextPropertiesElement::FontWeightComplex, value);
+    @style.set_property(StyleTextPropertiesElement::FontWeight, value)
+    @style.set_property(StyleTextPropertiesElement::FontWeightAsian, value)
+    @style.set_property(StyleTextPropertiesElement::FontWeightComplex, value)
   end
 
   def font_weight(value=nil)
@@ -46,9 +46,9 @@ class OpenStyle
 
   def font_style=(value)
     allow_symbols_as_values(value)
-    @style.set_property(StyleTextPropertiesElement::FontStyle, value);
-		@style.set_property(StyleTextPropertiesElement::FontStyleAsian, value);
-		@style.set_property(StyleTextPropertiesElement::FontStyleComplex, value);
+    @style.set_property(StyleTextPropertiesElement::FontStyle, value)
+    @style.set_property(StyleTextPropertiesElement::FontStyleAsian, value)
+    @style.set_property(StyleTextPropertiesElement::FontStyleComplex, value)
   end
 
   def font_style(value=nil)
@@ -57,9 +57,9 @@ class OpenStyle
   end
 
   def font_size=(value)
-    @style.set_property(StyleTextPropertiesElement::FontSize, value);
-	  @style.set_property(StyleTextPropertiesElement::FontSizeAsian, value);
-	  @style.set_property(StyleTextPropertiesElement::FontSizeComplex, value);
+    @style.set_property(StyleTextPropertiesElement::FontSize, value)
+    @style.set_property(StyleTextPropertiesElement::FontSizeAsian, value)
+    @style.set_property(StyleTextPropertiesElement::FontSizeComplex, value)
   end
 
   def font_size(value=nil)
