@@ -76,12 +76,13 @@ class OpenTextDocument
   # iterate over each element of the content
   def each
     (0...size).each do |i|
-      if @nodes.item(i).kind_of?(
+      current_node = @nodes.item(i)
+      if current_node.kind_of?(
         Java::OrgOdftoolkitOdfdomIncubatorDocText::OdfTextParagraph)
         # we got a wrapper for that!
-        yield OpenTextParagraph.new(@nodes.item(i))
+        yield OpenTextParagraph.new(current_node)
       else
-        yield @nodes.item(i)
+        yield current_node
       end
     end
     self
