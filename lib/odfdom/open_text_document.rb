@@ -75,7 +75,7 @@ class OpenTextDocument
 
   # iterate over each element of the content
   def each
-    (0...size).each do |i|
+    size.times do |i|
       current_node = @nodes.item(i)
       if current_node.kind_of?(
         Java::OrgOdftoolkitOdfdomIncubatorDocText::OdfTextParagraph)
