@@ -33,15 +33,7 @@ module ODFDOM
     end
 
     def paragraph(text=nil, style=nil)
-      paragraph = if text.nil?
-                    OdfTextParagraph.new(content_dom)
-                  elsif style.nil?
-                    OdfTextParagraph.new(content_dom).add_content(text)
-                  else
-                    OdfTextParagraph.new(content_dom,
-                      DEFAULT_STYLES[style] || style,
-                      text)
-                  end
+      paragraph = new_paragraph_object(text, style)
 
       office_text.append_child(paragraph)
       paragraph
@@ -90,6 +82,16 @@ module ODFDOM
     end
 
     private
+
+    def new_paragraph_object(text,style)
+      return OdfTextParagraph.new(content_dom) unless text
+
+      if style.nil?
+        OdfTextParagraph.new(content_dom).add_content(text)
+      else
+        OdfTextParagraph.new(content_dom, DEFAULT_STYLES[style] || style, text)
+      end
+    end
 
     def create(file_path)
       if file_path && File.exist?(file_path)
