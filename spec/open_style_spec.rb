@@ -16,6 +16,16 @@ describe "OpenStyle" do
 
     style.display_name.should == "A good test"
   end
+
+  it "should also be able to use the dual purpose accessor with name" do
+    style = @doc.style("test", :paragraph) do
+      name "A little test"
+    end
+
+    style.name.should == "A little test"
+  end
+
+
   describe "some attributes may be set with a symbol" do
 
     it "should work for font_weight" do
