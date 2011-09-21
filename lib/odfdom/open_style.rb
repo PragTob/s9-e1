@@ -13,13 +13,15 @@ module ODFDOM
       instance_eval(&block) if block_given?
     end
 
-    def display_name(name=@style.style_display_name_attribute)
+    def display_name(name=nil)
+      return @style.style_display_name_attribute unless name
       @style.style_display_name_attribute = name
     end
 
     alias_method :display_name=, :display_name
 
-    def name(name=@style.style_name_attribute)
+    def name(name=nil)
+      return @style.style_name_attribute unless name
       @style.style_name_attribute = name
     end
 
