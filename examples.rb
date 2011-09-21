@@ -9,7 +9,7 @@ end
 delete_files_in_the_beginning
 
 # simply creating and saving a file
-my_document = OpenTextDocument.new
+my_document = ODFDOM::OpenTextDocument.new
 my_document << "Hello Tobi!" << "How are you?" << "Isn't it a nice day?"
 my_document.save "Tobi.odt"
 my_document.close
@@ -17,13 +17,13 @@ my_document.close
 # you may also add to already existing documents!
 # if a file name is specified, files get saved automatically
 # also the file gets saved automatically
-OpenTextDocument.new "Tobi.odt" do
+ODFDOM::OpenTextDocument.new "Tobi.odt" do
   add_paragraph "Yeah it really is a nice day!"
 end
 
 # You can also create documents
 # you don't need to supply a file ending, this nice gem adds it for you!
-OpenTextDocument.new "nonexisting" do
+ODFDOM::OpenTextDocument.new "nonexisting" do
   add_paragraph "I don't exist!"
   add_paragraph "but you just created me!"
   # if you feel like paragraph is to verbose
@@ -31,7 +31,7 @@ OpenTextDocument.new "nonexisting" do
 end
 
 # And you may also use some of the default styles
-test = OpenTextDocument.new "styles" do
+ODFDOM::OpenTextDocument.new "styles" do
   add_heading "I am sooo big!"
   add_paragraph("I am feeling bold today", :bold)
   add_paragraph("I am italic", :italic)
@@ -46,8 +46,7 @@ test = OpenTextDocument.new "styles" do
 
   # refer to the style by name
   add_paragraph("Look at me, I am so beautiful!", "special heading")
-end
 
-# you can iterate over all the paragraphs in a document
-test.each { |each| puts each }
+  each { |each| puts each }
+end
 
