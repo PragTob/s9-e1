@@ -31,26 +31,27 @@ or (if you want this to be your permanent mode)
     # if a file name is specified, files get saved automatically
     # also the file gets saved automatically
     ODFDOM::OpenTextDocument.new "Tobi.odt" do
-      add_paragraph "Yeah it really is a nice day!"
+      paragraph "Yeah it really is a nice day!"
     end
 
     # You can also create documents
     # you don't need to supply a file ending, this nice gem adds it for you!
     ODFDOM::OpenTextDocument.new "nonexisting" do
-      add_paragraph "I don't exist!"
-      add_paragraph "but you just created me!"
+      paragraph "I don't exist!"
+
       # if you feel like paragraph is to verbose
-      add_p "That's awesome!"
+      para "but you just created me!"
+      p "That's awesome!"
     end
 
     # And you may also use some of the default styles
     ODFDOM::OpenTextDocument.new "styles" do
-      add_heading "I am sooo big!"
-      add_paragraph("I am feeling bold today", :bold)
-      add_paragraph("I am italic", :italic)
+      heading "I am sooo big!"
+      paragraph("I am feeling bold today", :bold)
+      paragraph("I am italic", :italic)
 
       # or define a new style
-      new_style("special heading", :paragraph) do
+      style("special heading", :paragraph) do
         font_size "24pt"
         font_weight "bold"
         font_style "italic"
@@ -58,7 +59,7 @@ or (if you want this to be your permanent mode)
       end
 
       # refer to the style by name
-      add_paragraph("Look at me, I am so beautiful!", "special heading")
+      paragraph("Look at me, I am so beautiful!", "special heading")
 
       each { |each| puts each }
     end

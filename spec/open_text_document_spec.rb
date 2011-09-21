@@ -61,21 +61,21 @@ describe "ODFDOM::OpenTextDocument" do
     the_same_doc.size.should == old_size
   end
 
-  it "should not change it's size when add_text is called,
+  it "should not change it's size when text is called,
       since no new paragraphs are created" do
     @doc << "A paragraph"
     old_size = @doc.size
-    @doc.add_text "Blablabla"
+    @doc.text "Blablabla"
     @doc.size.should == old_size
   end
 
   it "should be able to add a styled paragraph" do
-    lambda { @doc.add_paragraph("Para", :bold) }.should_not raise_error
+    lambda { @doc.paragraph("Para", :bold) }.should_not raise_error
     @doc.size.should == 1
   end
 
   it "should be able to add an heading" do
-    lambda { @doc.add_heading("Heading") }.should_not raise_error
+    lambda { @doc.heading("Heading") }.should_not raise_error
     @doc.size.should == 1
   end
 
@@ -93,7 +93,7 @@ describe "ODFDOM::OpenTextDocument" do
 
   it "should be able to use the to_a method thanks to Enumerable" do
     @doc << "1" << "2" << "3"
-    @doc.add_heading("I am also a normal item!")
+    @doc.heading("I am also a normal item!")
 
     @doc.to_a.size.should == @doc.size
   end
@@ -111,18 +111,18 @@ describe "ODFDOM::OpenTextDocument" do
   it "should not raise an error when it does normal work" do
     lambda do
       ODFDOM::OpenTextDocument.new(TESTFILES_DIRECTORY + "styles") do
-        add_heading "I am sooo big!"
-        add_paragraph("I am feeling bold today", :bold)
-        add_paragraph("I am italic", :italic)
+        heading "I am sooo big!"
+        paragraph("I am feeling bold today", :bold)
+        paragraph("I am italic", :italic)
 
-        new_style("special heading", :paragraph) do
+        style("special heading", :paragraph) do
           font_size "24pt"
           font_weight "bold"
           font_style "italic"
           display_name "Bold Italic Headline"
         end
 
-        add_paragraph("Look at me, I am so beautiful!", "special heading")
+        paragraph("Look at me, I am so beautiful!", "special heading")
       end
     end.should_not raise_error
 

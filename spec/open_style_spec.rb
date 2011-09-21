@@ -5,12 +5,12 @@ describe "OpenStyle" do
   # styles belong to docs therefore we need a doc
   before :each do
     @doc = ODFDOM::OpenTextDocument.new
-    @style = @doc.new_style("testie", :paragraph)
+    @style = @doc.style("testie", :paragraph)
   end
 
   # added to protect against regressions
   it "should be able to create styles in a block" do
-    style = @doc.new_style("test", :paragraph) do
+    style = @doc.style("test", :paragraph) do
       display_name "A good test"
     end
 

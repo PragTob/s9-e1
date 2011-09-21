@@ -19,7 +19,7 @@ module ODFDOM
     DEFAULT_FONT_SIZE = "12pt"
 
     def initialize(file_path=nil, &block)
-      create_document(file_path)
+      create(file_path)
       create_default_styles
       evaluate_block(file_path, &block) if block_given?
     end
@@ -32,7 +32,7 @@ module ODFDOM
       self
     end
 
-    def add_paragraph(text=nil, style=nil)
+    def paragraph(text=nil, style=nil)
       paragraph = if text.nil?
                     OdfTextParagraph.new(content_dom)
                   elsif style.nil?
@@ -47,17 +47,18 @@ module ODFDOM
       self
     end
 
-    alias_method :add_p, :add_paragraph
-    alias_method :<<, :add_paragraph
+    alias_method :para, :paragraph
+    alias_method :p, :paragraph
+    alias_method :<<, :paragraph
 
     # Text is just added to the last paragraph, no new paragraph/node created
-    def add_text(text)
+    def text(text)
       @document.add_text text
       self
     end
 
-    def add_heading(text)
-      add_paragraph(text, :heading)
+    def heading(text)
+      paragraph(text, :heading)
       self
     end
 
@@ -66,7 +67,7 @@ module ODFDOM
                                         @document.get_or_create_document_styles)
     end
 
-    def new_style(*args, &block)
+    def style(*args, &block)
       document_styles.new_style(*args, &block)
     end
 
@@ -90,7 +91,7 @@ module ODFDOM
 
     private
 
-    def create_document(file_path)
+    def create(file_path)
       if file_path && File.exist?(file_path)
         @document = OdfTextDocument.loadDocument file_path
       else
