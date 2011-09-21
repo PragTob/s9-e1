@@ -74,8 +74,7 @@ module ODFDOM
     def each
       size.times do |i|
         current_node = nodes.item(i)
-        if current_node.kind_of?(
-            Java::OrgOdftoolkitOdfdomIncubatorDocText::OdfTextParagraph)
+        if current_node.kind_of?(OdfTextParagraph)
           # we got a wrapper for that!
           yield OpenTextParagraph.new(current_node)
         else
