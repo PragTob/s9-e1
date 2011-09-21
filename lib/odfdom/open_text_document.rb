@@ -39,9 +39,6 @@ module ODFDOM
       paragraph
     end
 
-    alias_method :para, :paragraph
-    alias_method :p, :paragraph
-
     def <<(*args)
       paragraph(*args)
       self

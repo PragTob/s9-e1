@@ -38,10 +38,8 @@ or (if you want this to be your permanent mode)
     # you don't need to supply a file ending, this nice gem adds it for you!
     ODFDOM::OpenTextDocument.new "nonexisting" do
       paragraph "I don't exist!"
-
-      # if you feel like paragraph is to verbose
-      para "but you just created me!"
-      p "That's awesome!"
+      paragraph "but you just created me!"
+      paragraph "That's awesome!""
     end
 
     # And you may also use some of the default styles
