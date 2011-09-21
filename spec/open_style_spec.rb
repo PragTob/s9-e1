@@ -4,7 +4,7 @@ describe "OpenStyle" do
 
   # styles belong to docs therefore we need a doc
   before :each do
-    @doc = OpenTextDocument.new
+    @doc = ODFDOM::OpenTextDocument.new
     @style = @doc.new_style("testie", :paragraph)
   end
 

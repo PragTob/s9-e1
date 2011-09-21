@@ -4,7 +4,7 @@ require 'odfdom'
 describe "OpenParagraph" do
 
   before :each do
-    doc = OpenTextDocument.new
+    doc = ODFDOM::OpenTextDocument.new
     doc << "A stupid paragraph"
     doc.add_paragraph("A styled paragraph", :bold)
     @paragraph, @styled_paragraph  = doc.to_a

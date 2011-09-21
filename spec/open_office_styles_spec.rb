@@ -3,7 +3,7 @@ require 'odfdom'
 describe "OpenOfficeStyles" do
 
   before(:each) do
-    @doc = OpenTextDocument.new
+    @doc = ODFDOM::OpenTextDocument.new
   end
 
   it "should have one more style for a family when we add a style" do

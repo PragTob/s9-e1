@@ -6,10 +6,10 @@ def file_exists?(file_name)
   File.exist?(TESTFILES_DIRECTORY + file_name)
 end
 
-describe "OpenTextDocument" do
+describe "ODFDOM::OpenTextDocument" do
 
   before :each do
-    @doc = OpenTextDocument.new
+    @doc = ODFDOM::OpenTextDocument.new
   end
 
   after :each do
@@ -31,7 +31,7 @@ describe "OpenTextDocument" do
   end
 
   it "should create a file when create is used" do
-    OpenTextDocument.new(TESTFILES_DIRECTORY+"another_test.odt") {}
+    ODFDOM::OpenTextDocument.new(TESTFILES_DIRECTORY+"another_test.odt") {}
 
     file_exists?("another_test.odt").should == true
   end
@@ -57,7 +57,7 @@ describe "OpenTextDocument" do
     old_size = @doc.size
     @doc.save(TESTFILES_DIRECTORY + "test.odt")
 
-    the_same_doc = OpenTextDocument.new(TESTFILES_DIRECTORY + "test.odt")
+    the_same_doc = ODFDOM::OpenTextDocument.new(TESTFILES_DIRECTORY + "test.odt")
     the_same_doc.size.should == old_size
   end
 
@@ -111,7 +111,7 @@ describe "OpenTextDocument" do
   # I lack the traversing capabilities for some real good tests
   it "should not raise an error when it does normal work" do
     lambda do
-      OpenTextDocument.new(TESTFILES_DIRECTORY + "/styles") do
+      ODFDOM::OpenTextDocument.new(TESTFILES_DIRECTORY + "/styles") do
         add_heading "I am sooo big!"
         add_paragraph("I am feeling bold today", :bold)
         add_paragraph("I am italic", :italic)

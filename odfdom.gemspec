@@ -4,7 +4,7 @@ require "odfdom/version"
 
 Gem::Specification.new do |s|
   s.name        = "odfdom"
-  s.version     = Odfdom::VERSION
+  s.version     = ODFDOM::VERSION
   s.author     = "Tobias Pfeiffer"
   s.email       = "tobias.pfeiffer@student.hpi.uni-potsdam.de"
   s.homepage    = "https://github.com/PragTob/s9-e1"
