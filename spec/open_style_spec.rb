@@ -8,7 +8,7 @@ describe "OpenStyle" do
     @style = @doc.new_style("testie", :paragraph)
   end
 
-  # added toprotect against regressions
+  # added to protect against regressions
   it "should be able to create styles in a block" do
     style = @doc.new_style("test", :paragraph) do
       display_name "A good test"

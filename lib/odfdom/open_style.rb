@@ -1,13 +1,14 @@
 require 'java'
 require_relative '../../ext/odfdom-java-0.8.7-jar-with-dependencies.jar'
+
 java_import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle
 java_import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement
 
 module ODFDOM
   class OpenStyle
 
-    def initialize(style, &block)
-      @style = style
+    def initialize(java_style, &block)
+      @style = java_style
       instance_eval(&block) if block_given?
     end
 
@@ -17,7 +18,6 @@ module ODFDOM
 
     alias_method :display_name=, :display_name
 
-    # the internal name
     def name(name=@style.style_name_attribute)
       @style.style_name_attribute = name
     end

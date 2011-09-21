@@ -108,10 +108,9 @@ describe "ODFDOM::OpenTextDocument" do
   end
 
   # just to make sure no errors occure with normal code
-  # I lack the traversing capabilities for some real good tests
   it "should not raise an error when it does normal work" do
     lambda do
-      ODFDOM::OpenTextDocument.new(TESTFILES_DIRECTORY + "/styles") do
+      ODFDOM::OpenTextDocument.new(TESTFILES_DIRECTORY + "styles") do
         add_heading "I am sooo big!"
         add_paragraph("I am feeling bold today", :bold)
         add_paragraph("I am italic", :italic)

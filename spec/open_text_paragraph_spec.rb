@@ -1,6 +1,5 @@
 require 'odfdom'
 
-
 describe "OpenParagraph" do
 
   before :each do

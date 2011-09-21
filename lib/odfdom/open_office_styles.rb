@@ -1,11 +1,11 @@
 require 'java'
 require_relative 'open_style'
 require_relative '../../ext/odfdom-java-0.8.7-jar-with-dependencies.jar'
+
 java_import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles
 java_import org.odftoolkit.odfdom.dom.style.OdfStyleFamily
 
 module ODFDOM
-  # the node defining the styles of an open office document
   class OpenOfficeStyles
 
     STYLE_FAMILIES = {
@@ -18,9 +18,8 @@ module ODFDOM
       table_row: OdfStyleFamily::TableRow
     }
 
-    # initialize using the corresponding java Object
-    def initialize java_office_styles_object
-      @styles = java_office_styles_object
+    def initialize java_office_styles
+      @styles = java_office_styles
     end
 
     def new_style(name, family, &block)
@@ -28,10 +27,9 @@ module ODFDOM
     end
 
     def styles_for_family(family)
-      java_styles_iterator = @styles.get_styles_for_family(STYLE_FAMILIES[family])
+      java_styles = @styles.get_styles_for_family(STYLE_FAMILIES[family])
 
-      #create an array with our own style classes
-      java_styles_iterator.map { |style| OpenStyle.new(style) }
+      java_styles.map { |style| OpenStyle.new(style) }
     end
 
   end
