@@ -11,7 +11,7 @@ module ODFDOM
     STYLE_FAMILIES = {
       paragraph: OdfStyleFamily::Paragraph,
       text: OdfStyleFamily::Text,
-      ruby: OdfStyleFamily::Ruby, # I have no idea what this is
+      ruby: OdfStyleFamily::Ruby,
       list: OdfStyleFamily::List,
       table: OdfStyleFamily::Table,
       table_cell: OdfStyleFamily::TableCell,
