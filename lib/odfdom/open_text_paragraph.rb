@@ -6,7 +6,7 @@ module ODFDOM
       @paragraph = paragraph
     end
 
-    def to_s
+    def text
       @paragraph.text_content
     end
 
@@ -14,8 +14,7 @@ module ODFDOM
       @paragraph.style_name
     end
 
-    alias_method :content, :to_s
-    alias_method :text, :to_s
+    alias_method :to_s, :text
 
   end
 end

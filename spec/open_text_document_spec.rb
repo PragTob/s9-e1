@@ -101,10 +101,10 @@ describe "ODFDOM::OpenTextDocument" do
   # last check of Enumerable integration working, I promise!
   it "should be able to use the awesome select method thanks to Enumerable" do
     @doc << "The good" << "The bad" << "The ugly"
-    ugly = @doc.select { |each| each.content =~ /ugly/ }
+    ugly = @doc.select { |each| each.text =~ /ugly/ }
 
     ugly.size.should == 1
-    ugly.first.content.should == "The ugly"
+    ugly.first.text.should == "The ugly"
   end
 
   # just to make sure no errors occure with normal code
