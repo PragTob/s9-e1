@@ -26,7 +26,7 @@ module ODFDOM
 
     def save(file_path)
       file_path << FILE_ENDING if File.extname(file_path) != FILE_ENDING
-      @document.save file_path
+      @document.save(file_path)
 
       # it normally returns nil, but some people like to use save in if
       self
@@ -53,7 +53,7 @@ module ODFDOM
 
     # Text is just added to the last paragraph, no new paragraph/node created
     def text(text)
-      @document.add_text text
+      @document.add_text(text)
       self
     end
 
@@ -64,7 +64,7 @@ module ODFDOM
 
     def document_styles
       @document_styles || OpenOfficeStyles.new(
-                                        @document.get_or_create_document_styles)
+        @document.get_or_create_document_styles)
     end
 
     def style(*args, &block)
@@ -75,7 +75,7 @@ module ODFDOM
       size.times do |i|
         current_node = nodes.item(i)
         if current_node.kind_of?(
-          Java::OrgOdftoolkitOdfdomIncubatorDocText::OdfTextParagraph)
+            Java::OrgOdftoolkitOdfdomIncubatorDocText::OdfTextParagraph)
           # we got a wrapper for that!
           yield OpenTextParagraph.new(current_node)
         else
@@ -93,9 +93,9 @@ module ODFDOM
 
     def create(file_path)
       if file_path && File.exist?(file_path)
-        @document = OdfTextDocument.loadDocument file_path
+        @document = OdfTextDocument.loadDocument(file_path)
       else
-        @document = OdfTextDocument.newTextDocument
+        @document = OdfTextDocument.new_text_document
         # documents start out with an empty paragraph, we don't want that
         clear
       end
@@ -147,7 +147,7 @@ module ODFDOM
 
     def create_heading_style
       document_styles.new_style(DEFAULT_STYLES[:heading], :paragraph) do
-        display_name = "Simple Heading"
+        display_name "Simple Heading"
         font_size "24pt"
       end
     end
