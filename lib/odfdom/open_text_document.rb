@@ -44,22 +44,24 @@ module ODFDOM
                   end
 
       office_text.append_child(paragraph)
-      self
+      paragraph
     end
 
     alias_method :para, :paragraph
     alias_method :p, :paragraph
-    alias_method :<<, :paragraph
+
+    def <<(*args)
+      paragraph(*args)
+      self
+    end
 
     # Text is just added to the last paragraph, no new paragraph/node created
     def text(text)
       @document.add_text(text)
-      self
     end
 
     def heading(text)
       paragraph(text, :heading)
-      self
     end
 
     def document_styles
@@ -81,7 +83,6 @@ module ODFDOM
           yield current_node
         end
       end
-      self
     end
 
     def size
