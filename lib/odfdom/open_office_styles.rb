@@ -18,8 +18,9 @@ module ODFDOM
       table_row: OdfStyleFamily::TableRow
     }
 
-    def initialize(java_office_styles)
-      @styles = java_office_styles
+    # initialized given an original OdfOfficeStyles object
+    def initialize(styles)
+      @styles = styles
     end
 
     def new_style(name, family, &block)

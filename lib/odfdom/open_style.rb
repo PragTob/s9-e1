@@ -7,8 +7,9 @@ java_import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement
 module ODFDOM
   class OpenStyle
 
-    def initialize(java_style, &block)
-      @style = java_style
+    # initialized given an original OdfStyle object
+    def initialize(style, &block)
+      @style = style
       instance_eval(&block) if block_given?
     end
 

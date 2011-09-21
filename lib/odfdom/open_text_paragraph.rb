@@ -1,8 +1,9 @@
 module ODFDOM
   class OpenTextParagraph
 
-    def initialize(java_paragraph)
-      @paragraph = java_paragraph
+    # initialized given an original OdfTextParagraph object
+    def initialize(paragraph)
+      @paragraph = paragraph
     end
 
     def to_s
