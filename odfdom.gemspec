@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
     README.md
     Rakefile
     odfdom.gemspec
-    ext/odfdom-java-0.8.7-jar-with-dependencies.jar
+    vendor/odfdom-java-0.8.7-jar-with-dependencies.jar
   ]
   s.test_files    = Dir['spec/*.rb'] + ['spec/test_files']
   s.require_paths = ["lib"]

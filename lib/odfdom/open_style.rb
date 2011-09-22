@@ -1,7 +1,6 @@
 require 'java'
-require_relative '../../ext/odfdom-java-0.8.7-jar-with-dependencies.jar'
+require_relative '../../vendor/odfdom-java-0.8.7-jar-with-dependencies.jar'
 
-java_import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle
 java_import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement
 
 module ODFDOM
